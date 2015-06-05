@@ -1,3 +1,6 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
+
+
 <?php
 /**
  * The template for displaying the homepage
@@ -12,6 +15,7 @@
  * @since Accelerate Marketing 1.0
  */
 
+
 get_header(); ?>
 
 <section class="home-page">
@@ -24,6 +28,34 @@ get_header(); ?>
 		<?php endwhile; // end of the loop. ?>
 	</div><!-- .container -->
 </section><!-- .home-page -->
+
+
+<section class="featured-work">
+	<div class="site-content">
+		<h4>FEATURED WORK</h4>
+
+		<ul class="homepage-featured-work">
+		<?php query_posts('posts_per_page=3&post_type=case_studies'); ?>
+			<?php while ( have_posts() ) : the_post(); 
+				$image_1 = get_field("image_1");
+				$size = "medium";
+			?>
+			<li class="individual-featured-work">
+				<figure>
+					<?php echo wp_get_attachment_image($image_1, $size); ?>
+				</figure>
+
+				<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+			</li>
+			
+
+			<?php endwhile; // end of the loop. ?>
+			<?php wp_reset_query(); // resets the altered query back to the original ?>
+		</ul>
+
+	</div>
+</section>
+
 
 <section class="recent-posts">
 	<div class="site-content">
